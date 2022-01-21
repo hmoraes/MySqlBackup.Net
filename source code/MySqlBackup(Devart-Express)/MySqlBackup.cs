@@ -607,7 +607,7 @@ namespace Devart.Data.MySql
                         sb.Append(insertStatementHeader);
                     sb.Append(sqlDataRow);
                 }
-                else if ((long)sb.Length + (long)sqlDataRow.Length < ExportInfo.MaxSqlLength)
+                else if ((long)sb.Length + (long)sqlDataRow.Length + 3 < ExportInfo.MaxSqlLength)
                 {
                     if (ExportInfo.InsertLineBreakBetweenInserts)
                         sb.AppendLine(",");
@@ -622,7 +622,7 @@ namespace Devart.Data.MySql
                     Export_WriteLine(sb.ToString());
                     textWriter.Flush();
 
-                    sb = new StringBuilder((int)ExportInfo.MaxSqlLength);
+                    sb.Clear();
                     sb.AppendLine(insertStatementHeader);
                     sb.Append(sqlDataRow);
                 }
